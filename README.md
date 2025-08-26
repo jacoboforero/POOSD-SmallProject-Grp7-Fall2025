@@ -1,4 +1,4 @@
-# LAMP Scaffold
+# Small Project for POOSD in Fall 2025
 
 **Structure**
 - public/        → Apache web root (copy to /var/www/html)
@@ -7,7 +7,4 @@
 - logs/          → app logs (gitkept)
 - .htaccess      → optional Apache rewrites
 
-**Deploy**
-1. Push to GitHub
-2. SSH into droplet
-3. Clone into /var/www/html
+
