@@ -1,0 +1,4 @@
+# Ignore real config and logs
+config/.env
+logs/*
+!logs/.gitkeep

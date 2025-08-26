@@ -1,0 +1,8 @@
+# Optional Apache rewrites
+<IfModule mod_rewrite.c>
+RewriteEngine On
+# Example: route all non-file/dir requests to index.php
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteRule ^ public/index.php [L]
+</IfModule>
