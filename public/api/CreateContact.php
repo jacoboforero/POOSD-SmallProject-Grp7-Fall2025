@@ -16,10 +16,19 @@
 	{
 		$stmt = $conn->prepare("INSERT into Contacts (FirstName, LastName, Phone, Email, UserId) VALUES(?,?,?,?,?)");
 		$stmt->bind_param("sssss", $firstName, $lastName, $phone, $email, $userId);
-		$stmt->execute();
+		
+		if ($stmt->execute())
+		{
+        	$id = $conn->insert_id;
+        	returnWithInfo($firstName, $lastName, $id);
+    	} 
+		else 
+		{
+        	returnWithError("Error inserting contact: " . $stmt->error);
+    	}
+
 		$stmt->close();
 		$conn->close();
-		returnWithError("");
 	}
 
 	function getRequestInfo()

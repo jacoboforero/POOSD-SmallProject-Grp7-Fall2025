@@ -15,12 +15,20 @@
 	} 
 	else
 	{
-		tmt = $conn->prepare("UPDATE Contacts SET FirstName = ?, LastName = ?, Phone = ?, Email = ? WHERE ID = ? AND UserID = ?");
+		$stmt = $conn->prepare("UPDATE Contacts SET FirstName = ?, LastName = ?, Phone = ?, Email = ? WHERE ID = ? AND UserID = ?");
 		$stmt->bind_param("ssssss", $firstName, $lastName, $phone, $email, $id, $userId);
-		$stmt->execute();
+
+		if ($stmt->execute()) 
+		{
+        	returnWithError("");
+    	}
+		else
+		{
+        	returnWithError("Update failed: " . $stmt->error);
+    	}
+
 		$stmt->close();
 		$conn->close();
-		returnWithError("");
 	}
 
 	function getRequestInfo()

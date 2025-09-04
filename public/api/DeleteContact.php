@@ -14,9 +14,25 @@
 		$stmt = $conn->prepare("DELETE FROM Contacts WHERE ID = ? AND UserID = ?");
 		$stmt->bind_param("ss", $id, $userId);
 		$stmt->execute();
+
+		if ($stmt->execute())
+		{
+        	if ($stmt->affected_rows > 0)
+			{
+            	returnWithError("");
+        	}
+			else
+			{
+            	returnWithError("No matching contact found to delete.");
+        	}
+    	}
+		else
+		{
+        	returnWithError("Delete failed: " . $stmt->error);
+    	}
+
 		$stmt->close();
-		$conn->close();
-        returnWithError("");
+		$conn->close();=
 	}
 
 	function getRequestInfo()
