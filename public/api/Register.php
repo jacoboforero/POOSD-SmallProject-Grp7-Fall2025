@@ -7,8 +7,7 @@
 	$login = $inData["login"];
 	$password = $inData["password"];
 
-    if (!isset($firstName, $lastName, $login, $password) || 
-    empty($firstName) || empty($lastName) || empty($login) || empty($password)) {
+    if (empty($firstName) || empty($lastName) || empty($login) || empty($password)) {
         returnWithError("Missing required fields.");
         exit();
     }
