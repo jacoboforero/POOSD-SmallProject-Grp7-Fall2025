@@ -11,5 +11,27 @@
         <img id="sharklogo" src="./images/shark.png">
         <h1>Fin Friends</h1>
     </div>
+
+    <div class="main-content">
+    <div class="login-container">
+        <h2>welcome back!</h2>
+        <form onsubmit="doLogin(); return false;">
+            <div class="form-group">
+                <input type="text" id="loginName" placeholder="username" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="loginPassword" placeholder="password" required>
+            </div>
+            <button type="submit">dive in</button>
+
+            <div class="register-link">
+              <p>new to the reef? <a href="#" onclick="showRegister()">join the school</a></p>
+              </div>
+
+        </form>
+        <div id="loginResult"></div>
+    </div>
+</div>
+
 </body>
 </html>

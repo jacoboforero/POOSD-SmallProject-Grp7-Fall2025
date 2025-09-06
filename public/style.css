@@ -1,6 +1,6 @@
 @font-face {
     font-family: "Title";
-    src: url("./fonts/Dobidoo/Dobidoo.otf");
+    /* src: url("./fonts/Dobidoo/Dobidoo.otf"); */
     src: url("./fonts/catfiles/Catfiles.otf");
 }
 
@@ -35,4 +35,78 @@ html {
     background-color: #cce3e2;
 }
 
+.main-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 150px);
+    padding: 20px;
+}
 
+.login-container {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(76, 92, 92, 0.2);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+.login-container h2 {
+    color: #4C5C5C;
+    margin-bottom: 30px;
+    font-family: Arial, sans-serif;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 15px;
+    background: #4C5C5C;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#loginResult {
+    margin-top: 15px;
+    color: red;
+    font-weight: bold;
+}
+
+.register-link {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.register-link p {
+    color: #4C5C5C;
+    font-size: 18px;
+}
+
+.register-link a {
+    color: #6B8E8E;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.register-link a:hover {
+    color: #4C5C5C;
+    text-decoration: underline;
+}
