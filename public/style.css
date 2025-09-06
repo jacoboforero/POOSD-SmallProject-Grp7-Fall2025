@@ -1,0 +1,38 @@
+@font-face {
+    font-family: "Title";
+    src: url("./fonts/Dobidoo/Dobidoo.otf");
+    src: url("./fonts/catfiles/Catfiles.otf");
+}
+
+.header {
+     display: flex; 
+     align-items: center; 
+     position: relative; 
+     width: 100%;
+     padding: 20px 0;
+}
+
+#sharklogo {
+    width: 250px; 
+    height: 110px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.header h1 {
+    position: absolute; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    margin: 0; 
+    width: 100%; 
+    text-align: center;
+    color: #4C5C5C;
+    font-size: 70px;
+    font-family: "Title";
+}
+
+html {
+    background-color: #cce3e2;
+}
+
+
