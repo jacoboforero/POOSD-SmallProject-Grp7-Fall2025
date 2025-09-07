@@ -4,7 +4,6 @@
 	
 	$searchResults = "";
 	$searchCount = 0;
-	$searchTerm = "%" . $inData["search"] . "%";
 
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 	if ($conn->connect_error) 
@@ -13,8 +12,9 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("select Name from Contacts where (WHERE BINARY FirstName LIKE ? OR BINARY LastName LIKE ?) and UserID=?");  //binary for case sensitive searches?
-		$stmt->bind_param("sss", $searchTerm, $searchTerm, $inData["userId"]);
+		$stmt = $conn->prepare("select Name from Contacts where (BINARY FirstName LIKE ? OR BINARY LastName LIKE ?) and UserID=?");  //binary for case sensitive searches?
+		$searchName = "%" . $inData["search"] . "%";
+		$stmt->bind_param("ss", $searchName, $inData["userId"]);
 		$stmt->execute();
 		
 		$result = $stmt->get_result();
