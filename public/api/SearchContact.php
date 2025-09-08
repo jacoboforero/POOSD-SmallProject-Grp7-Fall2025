@@ -12,9 +12,9 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("select Name from Contacts where (BINARY FirstName LIKE ? OR BINARY LastName LIKE ?) and UserID=?");  //binary for case sensitive searches?
+		$stmt = $conn->prepare("SELECT FirstName, LastName FROM Contacts WHERE (FirstName LIKE ? OR LastName LIKE ?) AND UserID=?");  //binary for case sensitive searches?
 		$searchName = "%" . $inData["search"] . "%";
-		$stmt->bind_param("ss", $searchName, $inData["userId"]);
+		$stmt->bind_param("sss", $searchName, $searchName, $inData["userId"]);
 		$stmt->execute();
 		
 		$result = $stmt->get_result();
