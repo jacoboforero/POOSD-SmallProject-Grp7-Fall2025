@@ -12,7 +12,7 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("SELECT FirstName, LastName FROM Contacts WHERE (FirstName LIKE ? OR LastName LIKE ?) AND UserID=?");  //binary for case sensitive searches?
+		$stmt = $conn->prepare("SELECT FirstName, LastName, Phone, Email FROM Contacts WHERE (FirstName LIKE ? OR LastName LIKE ?) AND UserID=?");  //binary for case sensitive searches?
 		$searchName = "%" . $inData["search"] . "%";
 		$stmt->bind_param("sss", $searchName, $searchName, $inData["userId"]);
 		$stmt->execute();
@@ -26,7 +26,7 @@
 				$searchResults .= ",";
 			}
 			$searchCount++;
-			$searchResults .= '"' . $row["FirstName"] . ' ' . $row["LastName"] . '"';
+			$searchResults .= '"' . $row["FirstName"] . ' ' . $row["LastName"] . ', ' . $row["Phone"] . ', ' . $row["Email"] . '"';
 		}
 		
 		if( $searchCount == 0 )
