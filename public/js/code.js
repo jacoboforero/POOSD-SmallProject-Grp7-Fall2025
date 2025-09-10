@@ -97,3 +97,53 @@ function doLogout() {
   document.cookie = "firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
   window.location.href = "index.html";
 }
+
+function doRegister() {
+  let login = document.getElementById("registerName").value;
+  let email = document.getElementById("registerEmail").value;
+  let password = document.getElementById("registerPassword").value;
+
+  document.getElementById("registerResult").innerHTML = "";
+
+  let tmp = {
+    login: login,
+    email: email,
+    password: password
+  };
+
+  let jsonPayload = JSON.stringify(tmp);
+
+  let url = urlBase + "/Register." + extension;
+
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+  try {
+    xhr.onreadystatechange = function () {
+      if (this.readyState == 4) {
+        if (this.status == 200) {
+          let jsonObject = JSON.parse(xhr.responseText);
+
+          if (jsonObject.error) {
+            document.getElementById("registerResult").innerHTML = jsonObject.error;
+            return;
+          }
+
+          document.getElementById("registerResult").innerHTML = "Registration successful!";
+
+          // Optionally: auto-login the user
+          // showLogin(); // Switch back to login form
+          // Or redirect
+          // window.location.href = "color.html";
+        } else {
+          document.getElementById("registerResult").innerHTML = "Registration failed.";
+        }
+      }
+    };
+    xhr.send(jsonPayload);
+  } catch (err) {
+    document.getElementById("registerResult").innerHTML = err.message;
+  }
+}
+
