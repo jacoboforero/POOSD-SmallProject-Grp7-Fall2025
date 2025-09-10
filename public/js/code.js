@@ -99,20 +99,21 @@ function doLogout() {
 }
 
 function doRegister() {
+  let firstName = document.getElementById("registerFirstName").value;
+  let lastName = document.getElementById("registerLastName").value;
   let login = document.getElementById("registerName").value;
-  let email = document.getElementById("registerEmail").value;
   let password = document.getElementById("registerPassword").value;
 
   document.getElementById("registerResult").innerHTML = "";
 
   let tmp = {
+    firstName: firstName,
+    lastName: lastName,
     login: login,
-    email: email,
     password: password
   };
 
   let jsonPayload = JSON.stringify(tmp);
-
   let url = urlBase + "/Register." + extension;
 
   let xhr = new XMLHttpRequest();
@@ -131,11 +132,9 @@ function doRegister() {
           }
 
           document.getElementById("registerResult").innerHTML = "Registration successful!";
-
-          // Optionally: auto-login the user
-          // showLogin(); // Switch back to login form
-          // Or redirect
-          // window.location.href = "color.html";
+          setTimeout(() => {
+            showLogin();
+          }, 1500);
         } else {
           document.getElementById("registerResult").innerHTML = "Registration failed.";
         }
