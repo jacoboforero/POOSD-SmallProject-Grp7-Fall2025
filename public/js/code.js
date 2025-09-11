@@ -1,5 +1,4 @@
-const urlBase =
-  "http://162.243.185.62/POOSD-SmallProject-Grp7-Fall2025/app/api"; //'http://COP4331-5.com/LAMPAPI';
+const urlBase = "http://poosdproj.xyz/api/Register.php/api/Register.php"; //'http://COP4331-5.com/LAMPAPI';
 const extension = "php";
 
 let userId = 0;
@@ -110,11 +109,11 @@ function doRegister() {
     firstName: firstName,
     lastName: lastName,
     login: login,
-    password: password
+    password: password,
   };
 
   let jsonPayload = JSON.stringify(tmp);
-  let url = urlBase + "/Register." + extension;
+  let url = "http://poosdproj.xyz/api/Register.php/api/Register.php";
 
   let xhr = new XMLHttpRequest();
   xhr.open("POST", url, true);
@@ -127,16 +126,19 @@ function doRegister() {
           let jsonObject = JSON.parse(xhr.responseText);
 
           if (jsonObject.error) {
-            document.getElementById("registerResult").innerHTML = jsonObject.error;
+            document.getElementById("registerResult").innerHTML =
+              jsonObject.error;
             return;
           }
 
-          document.getElementById("registerResult").innerHTML = "Registration successful!";
+          document.getElementById("registerResult").innerHTML =
+            "Registration successful!";
           setTimeout(() => {
             showLogin();
           }, 1500);
         } else {
-          document.getElementById("registerResult").innerHTML = "Registration failed.";
+          document.getElementById("registerResult").innerHTML =
+            "Registration failed.";
         }
       }
     };
@@ -145,4 +147,3 @@ function doRegister() {
     document.getElementById("registerResult").innerHTML = err.message;
   }
 }
-
