@@ -103,7 +103,7 @@ function doRegister() {
   let login = document.getElementById("registerName").value;
   let password = document.getElementById("registerPassword").value;
 
-  document.getElementById("registerResult").innerHTML = "";
+  document.getElementById("registerResult").innerHTML = "Hello World";
 
   let tmp = {
     firstName: firstName,
