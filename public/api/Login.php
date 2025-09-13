@@ -1,4 +1,5 @@
 <?php
+	require_once '../../app/includes/db.php';
     
 	$inData = getRequestInfo();
 	
@@ -6,11 +7,11 @@
 	$firstName = "";
 	$lastName = "";
 
-	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331"); 	
+	$conn = getDBConnection(); 	
 	
-    if( $conn->connect_error )
+    if( !$conn )
 	{
-		returnWithError( $conn->connect_error );
+		returnWithError( "Database connection failed" );
 	}
 	else
 	{

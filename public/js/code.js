@@ -1,4 +1,9 @@
-const urlBase = "http://poosdproj.xyz/api/Register.php/api/Register.php"; //'http://COP4331-5.com/LAMPAPI';
+// Detect if we're running locally (Docker) or in production
+const isLocal =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1";
+
+const urlBase = isLocal ? "/api" : "http://poosdproj.xyz/api";
 const extension = "php";
 
 let userId = 0;
@@ -100,7 +105,7 @@ function doLogout() {
 function doRegister() {
   let firstName = document.getElementById("registerFirstName").value;
   let lastName = document.getElementById("registerLastName").value;
-  let login = document.getElementById("registerName").value;
+  let login = document.getElementById("registerUsername").value;
   let password = document.getElementById("registerPassword").value;
 
   document.getElementById("registerResult").innerHTML = "Hello World";
@@ -113,7 +118,7 @@ function doRegister() {
   };
 
   let jsonPayload = JSON.stringify(tmp);
-  let url = "http://poosdproj.xyz/api/Register.php/api/Register.php";
+  let url = urlBase + "/Register." + extension;
 
   let xhr = new XMLHttpRequest();
   xhr.open("POST", url, true);
