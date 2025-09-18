@@ -8,6 +8,11 @@
 	$email = $inData["email"];
 	$userId = $inData["userId"];
 
+	if (empty($id) || empty($firstName) || empty($lastName) || empty($phone) || empty($email) || empty($userId)) {
+        returnWithError("Missing required fields.");
+        exit();
+    }
+
 	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
 	if ($conn->connect_error) 
 	{
