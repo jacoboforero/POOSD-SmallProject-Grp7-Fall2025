@@ -38,7 +38,7 @@ function doLogin() {
 
         if (userId < 1) {
           document.getElementById("loginResult").innerHTML =
-            "User/Password combination incorrect";
+            "user/password combination incorrect";
           return;
         }
 
@@ -47,7 +47,7 @@ function doLogin() {
 
         saveCookie();
 
-        window.location.href = "color.html";
+        window.location.href = "contacts.html";
       }
     };
     xhr.send(jsonPayload);
@@ -137,13 +137,13 @@ function doRegister() {
           }
 
           document.getElementById("registerResult").innerHTML =
-            "Registration successful!";
+            "registration successful!";
           setTimeout(() => {
             showLogin();
           }, 1500);
         } else {
           document.getElementById("registerResult").innerHTML =
-            "Registration failed.";
+            "registration failed.";
         }
       }
     };

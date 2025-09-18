@@ -1,0 +1,155 @@
+@font-face {
+  font-family: "Title";
+  src: url("./fonts/catfiles/Catfiles.otf");
+}
+
+html {
+  background-color: #cce3e2;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* sidebar */
+.sidenav {
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #cce3e2;
+  padding-top: 20px;
+  text-align: center;
+  border-right: 2px solid #4C5C5C;
+  
+}
+
+#sharklogo {
+  width: 250px;
+  height: 110px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.sidenav a {
+  display: block;
+  margin: 15px 0;
+  text-decoration: none;
+  color: #4C5C5C;
+  padding-top: 20px;
+  font-size: 22px;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+}
+
+.sidenav a:hover {
+  text-decoration: underline;
+}
+
+
+.main-container {
+  margin-left: 160px;
+  padding: 20px;
+}
+
+/* header */
+.header {
+  text-align: center;
+}
+
+.header h1 {
+  font-size: 60px;
+  color: #4C5C5C;
+  font-family: "Title";
+  margin: 10px 0 30px;
+}
+
+/* search bar and icons */
+.search-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.search-box {
+  position: relative;
+  width: 300px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 10px 35px;
+  border: 2px solid #4C5C5C;
+  border-radius: 8px;
+  font-size: 18px;
+  background-color: #e9f3f3;
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #4C5C5C;
+}
+
+.icons {
+  display: flex;
+  gap: 20px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.icons span:hover {
+  transform: scale(1.2);
+  transition: 0.2s ease;
+}
+
+/* Contacts table */
+.contacts-table {
+  margin: 0 auto;
+  max-width: 800px;
+  background-color: #cce3e2;
+  border: 2px solid #4C5C5C;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.table-header,
+.row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.table-header {
+  background-color: #e9f3f3;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+  padding: 10px 0;
+  border-bottom: 2px solid #4C5C5C;
+}
+
+.row {
+  text-align: center;
+  padding: 10px 0;
+  font-size: 18px;
+}
+
+.row:nth-child(even) {
+  background-color: #e9f3f3;
+}
+
+.column {
+  padding: 8px;
+}
+
+
+.contacts-table {
+  border: 3px solid #4C5C5C;
+  border-radius: 15px;
+  box-shadow: 2px 2px 5px rgba(76, 92, 92, 0.3);
+}
