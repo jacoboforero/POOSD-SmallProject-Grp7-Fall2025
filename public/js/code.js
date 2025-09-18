@@ -1,5 +1,9 @@
-const urlBase =
-  "http://162.243.185.62/POOSD-SmallProject-Grp7-Fall2025/app/api"; //'http://COP4331-5.com/LAMPAPI';
+// Detect if we're running locally (Docker) or in production
+const isLocal =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1";
+
+const urlBase = isLocal ? "/api" : "http://poosdproj.xyz/api";
 const extension = "php";
 
 let userId = 0;
@@ -96,4 +100,55 @@ function doLogout() {
   lastName = "";
   document.cookie = "firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
   window.location.href = "index.html";
+}
+
+function doRegister() {
+  let firstName = document.getElementById("registerFirstName").value;
+  let lastName = document.getElementById("registerLastName").value;
+  let login = document.getElementById("registerUsername").value;
+  let password = document.getElementById("registerPassword").value;
+
+  document.getElementById("registerResult").innerHTML = "Hello World";
+
+  let tmp = {
+    firstName: firstName,
+    lastName: lastName,
+    login: login,
+    password: password,
+  };
+
+  let jsonPayload = JSON.stringify(tmp);
+  let url = urlBase + "/Register." + extension;
+
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+  try {
+    xhr.onreadystatechange = function () {
+      if (this.readyState == 4) {
+        if (this.status == 200) {
+          let jsonObject = JSON.parse(xhr.responseText);
+
+          if (jsonObject.error) {
+            document.getElementById("registerResult").innerHTML =
+              jsonObject.error;
+            return;
+          }
+
+          document.getElementById("registerResult").innerHTML =
+            "Registration successful!";
+          setTimeout(() => {
+            showLogin();
+          }, 1500);
+        } else {
+          document.getElementById("registerResult").innerHTML =
+            "Registration failed.";
+        }
+      }
+    };
+    xhr.send(jsonPayload);
+  } catch (err) {
+    document.getElementById("registerResult").innerHTML = err.message;
+  }
 }
