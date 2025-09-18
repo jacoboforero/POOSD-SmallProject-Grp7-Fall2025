@@ -1,84 +1,86 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="style.css">
-    <title>Fin Friends</title>
-  </head>
 
-  <body>
-    <div class="header">
-        <img id="sharklogo" src="./images/shark.png">
-        <h1>Fin Friends</h1>
-    </div>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css">
+  <title>Fin Friends</title>
+</head>
 
-   <div class="main-content">
+<body>
+  <div class="header">
+    <img id="sharklogo" src="./images/shark.png">
+    <h1>Fin Friends</h1>
+  </div>
+
+  <div class="main-content">
     <div class="login-container" id="loginForm">
-    <h2>welcome back!</h2>
-    <form onsubmit="doLogin(); return false;">
-      <div class="form-group">
-        <input type="text" id="loginName" placeholder="username" required>
-      </div>
-      <div class="form-group">
-        <input type="password" id="loginPassword" placeholder="password" required>
-      </div>
-      <button type="submit">dive in</button>
-      <div class="register-link">
-        <p>new to the reef? <a href="#" onclick="showRegister()">join the school</a></p>
-      </div>
-    </form>
-    <div id="loginResult"></div>
-  </div>
-
-  <div class="login-container" id="registerForm" style="display: none;">
-    <h2>join the school!</h2>
-    <form onsubmit="doRegister(); return false;">
-      <div class="form-group">
-        <input type="text" id="registerFirstName" placeholder="first name" required>
-      </div>
-      <div class="form-group">
-        <input type="text" id="registerLastName" placeholder="last name" required>
-      </div>
-      <div class="form-group">
-        <input type="text" id="registerUsername" placeholder="username" required>
-      </div>
-      <div class="form-group">
-        <input type="password" id="registerPassword" placeholder="password" required>
-      </div>
-      <button type="submit">swim in</button>
-      <div class="register-link">
-        <p>already in the reef? <a href="#" onclick="showLogin()">swim back</a></p>
-      </div>
-      
-    </form>
-    <div id="registerResult"></div>
-  </div>
-</div>
-
-<script src="js/code.js"></script>
-<script>
-  function showRegister() {
-    // Hide the login form
-    document.getElementById("loginForm").style.display = "none";
-
-    // Show the register form
-    document.getElementById("registerForm").style.display = "block";
-  }
-
-  function showLogin() {
-    // Hide the register form
-    document.getElementById("registerForm").style.display = "none";
-
-    // Show the login form
-    document.getElementById("loginForm").style.display = "block";
-  }
-</script>
-
-
-        </form>
-        <div id="loginResult"></div>
+      <h2>welcome back!</h2>
+      <form onsubmit="doLogin(); return false;">
+        <div class="form-group">
+          <input type="text" id="loginName" placeholder="username" required>
+        </div>
+        <div class="form-group">
+          <input type="password" id="loginPassword" placeholder="password" required>
+        </div>
+        <button type="submit">dive in</button>
+        <div class="register-link">
+          <p>new to the reef? <a href="#" onclick="showRegister()">join the school</a></p>
+        </div>
+      </form>
+      <div id="loginResult"></div>
     </div>
-</div>
+
+    <div class="login-container" id="registerForm" style="display: none;">
+      <h2>join the school!</h2>
+      <form onsubmit="doRegister(); return false;">
+        <div class="form-group">
+          <input type="text" id="registerFirstName" placeholder="first name" required>
+        </div>
+        <div class="form-group">
+          <input type="text" id="registerLastName" placeholder="last name" required>
+        </div>
+        <div class="form-group">
+          <input type="text" id="registerUsername" placeholder="username" required>
+        </div>
+        <div class="form-group">
+          <input type="password" id="registerPassword" placeholder="password" required>
+        </div>
+        <button type="submit">swim in</button>
+        <div class="register-link">
+          <p>already in the reef? <a href="#" onclick="showLogin()">swim back</a></p>
+        </div>
+
+      </form>
+      <div id="registerResult"></div>
+    </div>
+  </div>
+
+  <script src="js/code.js"></script>
+  <script>
+    function showRegister() {
+      // Hide the login form
+      document.getElementById("loginForm").style.display = "none";
+
+      // Show the register form
+      document.getElementById("registerForm").style.display = "block";
+    }
+
+    function showLogin() {
+      // Hide the register form
+      document.getElementById("registerForm").style.display = "none";
+
+      // Show the login form
+      document.getElementById("loginForm").style.display = "block";
+    }
+  </script>
+
+
+  </form>
+  <div id="loginResult"></div>
+  </div>
+  </div>
 
 </body>
+
 </html>
