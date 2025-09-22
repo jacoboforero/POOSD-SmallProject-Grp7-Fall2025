@@ -322,21 +322,21 @@ function addContact() {
   if (!firstName || !lastName) {
     const resultDiv = document.getElementById("addContactResult");
     resultDiv.innerHTML = "first and last name are required";
-    resultDiv.className = "form-result";
+    resultDiv.className = "form-result error";
     return;
   }
 
   if (!email && !phone) {
     const resultDiv = document.getElementById("addContactResult");
     resultDiv.innerHTML = "email and phone number is required";
-    resultDiv.className = "form-result";
+    resultDiv.className = "form-result error";
     return;
   }
 
   if (email && !email.includes("@")) {
     const resultDiv = document.getElementById("addContactResult");
     resultDiv.innerHTML = "please enter a valid email address";
-    resultDiv.className = "form-result";
+    resultDiv.className = "form-result error";
     return;
   }
 
@@ -362,7 +362,7 @@ function addContact() {
           if (jsonObject.error && jsonObject.error !== "") {
             const resultDiv = document.getElementById("addContactResult");
             resultDiv.innerHTML = jsonObject.error;
-            resultDiv.className = "form-result";
+            resultDiv.className = "form-result error";
             return;
           }
 
@@ -386,7 +386,7 @@ function addContact() {
         } else {
           const resultDiv = document.getElementById("addContactResult");
           resultDiv.innerHTML = "Failed to add contact";
-          resultDiv.className = "form-result";
+          resultDiv.className = "form-result error";
         }
       }
     };
@@ -394,7 +394,7 @@ function addContact() {
   } catch (err) {
     const resultDiv = document.getElementById("addContactResult");
     resultDiv.innerHTML = err.message;
-    resultDiv.className = "form-result";
+    resultDiv.className = "form-result error";
   }
 }
 
@@ -406,20 +406,23 @@ function updateContact(contactId) {
   const phone = document.getElementById("editPhone").value.trim();
 
   if (!firstName || !lastName) {
-    document.getElementById("contactModalResult").innerHTML =
-      "First and Last name are required";
+    const resultDiv = document.getElementById("contactModalResult");
+    resultDiv.innerHTML = "First and Last name are required";
+    resultDiv.className = "form-result error";
     return;
   }
 
   if (!email && !phone) {
-    document.getElementById("contactModalResult").innerHTML =
-      "Email or phone number is required";
+    const resultDiv = document.getElementById("contactModalResult");
+    resultDiv.innerHTML = "Email or phone number is required";
+    resultDiv.className = "form-result error";
     return;
   }
 
   if (email && !email.includes("@")) {
-    document.getElementById("contactModalResult").innerHTML =
-      "Please enter a valid email address";
+    const resultDiv = document.getElementById("contactModalResult");
+    resultDiv.innerHTML = "Please enter a valid email address";
+    resultDiv.className = "form-result error";
     return;
   }
 
@@ -444,21 +447,25 @@ function updateContact(contactId) {
         if (this.status == 200) {
           let jsonObject = JSON.parse(xhr.responseText);
           if (jsonObject.error && jsonObject.error !== "") {
-            document.getElementById("contactModalResult").innerHTML =
-              jsonObject.error;
+            const resultDiv = document.getElementById("contactModalResult");
+            resultDiv.innerHTML = jsonObject.error;
+            resultDiv.className = "form-result error";
             return;
           }
           closeContactModal();
           loadContacts();
         } else {
-          document.getElementById("contactModalResult").innerHTML =
-            "Failed to update contact";
+          const resultDiv = document.getElementById("contactModalResult");
+          resultDiv.innerHTML = "Failed to update contact";
+          resultDiv.className = "form-result error";
         }
       }
     };
     xhr.send(jsonPayload);
   } catch (err) {
-    document.getElementById("contactModalResult").innerHTML = err.message;
+    const resultDiv = document.getElementById("contactModalResult");
+    resultDiv.innerHTML = err.message;
+    resultDiv.className = "form-result error";
   }
 }
 
@@ -486,21 +493,25 @@ function deleteContact(contactId) {
         if (this.status == 200) {
           let jsonObject = JSON.parse(xhr.responseText);
           if (jsonObject.error && jsonObject.error !== "") {
-            document.getElementById("contactModalResult").innerHTML =
-              jsonObject.error;
+            const resultDiv = document.getElementById("contactModalResult");
+            resultDiv.innerHTML = jsonObject.error;
+            resultDiv.className = "form-result error";
             return;
           }
           closeContactModal();
           loadContacts();
         } else {
-          document.getElementById("contactModalResult").innerHTML =
-            "Failed to delete contact";
+          const resultDiv = document.getElementById("contactModalResult");
+          resultDiv.innerHTML = "Failed to delete contact";
+          resultDiv.className = "form-result error";
         }
       }
     };
     xhr.send(jsonPayload);
   } catch (err) {
-    document.getElementById("contactModalResult").innerHTML = err.message;
+    const resultDiv = document.getElementById("contactModalResult");
+    resultDiv.innerHTML = err.message;
+    resultDiv.className = "form-result error";
   }
 }
 

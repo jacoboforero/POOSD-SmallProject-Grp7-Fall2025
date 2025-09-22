@@ -16,10 +16,14 @@
   border-radius: 4px;
   z-index: 1000;
   font-weight: bold;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .skip-link:focus {
   top: 6px;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .visually-hidden {
