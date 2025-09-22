@@ -41,18 +41,67 @@
         <div class="column">email</div>
         <div class="column">phone</div>
       </div>
+
       <div class="table-body">
 
-        <div class="row">
-          <div class="column"></div>
-          <div class="column"></div>
-          <div class="column"></div>
-          <div class="column"></div>
-
-        </div>
       </div>
     </div>
   </div>
+
+  <!-- add contact modal -->
+  <div id="addContactModal" class="modal-overlay hidden">
+    <div class="modal-content">
+      <h2 class="modal-title">add new contact</h2>
+      <div class="form-group">
+        <input type="text" id="newFirstName" placeholder="first name" class="form-input">
+      </div>
+      <div class="form-group">
+        <input type="text" id="newLastName" placeholder="last name" class="form-input">
+      </div>
+      <div class="form-group">
+        <input type="email" id="newEmail" placeholder="email" class="form-input">
+      </div>
+      <div class="form-group">
+        <input type="tel" id="newPhone" placeholder="phone" class="form-input">
+      </div>
+      <div id="addContactResult" class="form-result"></div>
+      <div class="button-group">
+        <button onclick="addContact()" class="modal-btn modal-btn-primary">add contact</button>
+        <button onclick="closeAddContactModal()" class="modal-btn modal-btn-secondary">cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- contact details modal -->
+  <div id="contactModal" class="modal-overlay hidden">
+    <div class="modal-content">
+      <h2 class="modal-title">contact details</h2>
+      <div class="form-group">
+        <label class="form-label">first name:</label>
+        <input type="text" id="editFirstName" class="form-input">
+      </div>
+      <div class="form-group">
+        <label class="form-label">last name:</label>
+        <input type="text" id="editLastName" class="form-input">
+      </div>
+      <div class="form-group">
+        <label class="form-label">email:</label>
+        <input type="email" id="editEmail" class="form-input">
+      </div>
+      <div class="form-group">
+        <label class="form-label">phone:</label>
+        <input type="tel" id="editPhone" class="form-input">
+      </div>
+      <div id="contactModalResult" class="form-result"></div>
+      <div class="button-group">
+        <button id="updateContactBtn" class="modal-btn modal-btn-primary">update</button>
+        <button id="deleteContactBtn" class="modal-btn modal-btn-danger">delete</button>
+        <button onclick="closeContactModal()" class="modal-btn modal-btn-secondary">close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/user.js"></script>
 
 </body>
 
