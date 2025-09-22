@@ -24,6 +24,8 @@ services:
       args:
         PHP_VERSION: ${PHP_VERSION}
         APACHE_DOCUMENT_ROOT: ${APACHE_DOCUMENT_ROOT}
+    environment:
+      - DOCKER_CONTAINER=true
     volumes:
       - ./:/var/www/html
       - ./web/vhost.conf:/etc/apache2/sites-available/000-default.conf:ro

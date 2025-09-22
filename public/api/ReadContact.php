@@ -1,18 +1,19 @@
 <?php
+	require_once '../../app/includes/db.php';
 
 	$inData = getRequestInfo();
 	
 	$searchResults = "";
 	$searchCount = 0;
 
-	$conn = new mysqli("localhost", "TheBeast", "WeLoveCOP4331", "COP4331");
-	if ($conn->connect_error) 
+	$conn = getDBConnection();
+	if (!$conn) 
 	{
-		returnWithError( $conn->connect_error );
+		returnWithError( "Database connection failed" );
 	} 
 	else
 	{
-        $stmt = $conn->prepare("SELECT FirstName, LastName, Phone, Email FROM Contacts WHERE UserID = ?");
+        $stmt = $conn->prepare("SELECT ID, FirstName, LastName, Phone, Email FROM Contacts WHERE UserID = ?");
 		$stmt->bind_param("s",$inData["userId"]);
 		$stmt->execute();
 		
@@ -25,7 +26,7 @@
 				$searchResults .= ",";
 			}
 			$searchCount++;
-			$searchResults .= '"' . $row["FirstName"] . ' ' . $row["LastName"] . ', ' . $row["Phone"] . ', ' . $row["Email"] . '"';
+			$searchResults .= '"' . $row["FirstName"] . ' ' . $row["LastName"] . ', ' . $row["Phone"] . ', ' . $row["Email"] . ', ' . $row["ID"] . '"';
 		}
 		
 		if( $searchCount == 0 )
