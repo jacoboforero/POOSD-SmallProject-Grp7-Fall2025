@@ -60,7 +60,7 @@ function setupEventListeners() {
     .querySelector(".add-user")
     .addEventListener("click", showAddContactForm);
   document
-    .querySelector(".search-box input")
+    .querySelector("#searchInput")
     .addEventListener("input", searchContacts);
   document
     .querySelector('a[href="#logout"]')
@@ -73,23 +73,39 @@ function setupEventListeners() {
   document
     .getElementById("deleteContactBtn")
     .addEventListener("click", () => deleteContact(currentContactId));
+
+  // Add keyboard navigation for modals
+  document.addEventListener("keydown", handleModalKeyboard);
 }
 
 // show add contact modal
 function showAddContactForm() {
-  document.getElementById("addContactModal").classList.remove("hidden");
+  const modal = document.getElementById("addContactModal");
+  modal.classList.remove("hidden");
+  modal.setAttribute("aria-hidden", "false");
+
+  // Focus on first input for accessibility
   document.getElementById("newFirstName").focus();
+
+  // Trap focus within modal
+  trapFocus(modal);
 }
 
 // close add contact modal
 function closeAddContactModal() {
-  document.getElementById("addContactModal").classList.add("hidden");
+  const modal = document.getElementById("addContactModal");
+  modal.classList.add("hidden");
+  modal.setAttribute("aria-hidden", "true");
+
   // clear form
   document.getElementById("newFirstName").value = "";
   document.getElementById("newLastName").value = "";
   document.getElementById("newEmail").value = "";
   document.getElementById("newPhone").value = "";
   document.getElementById("addContactResult").innerHTML = "";
+
+  // Remove focus from add button to hide outline
+  document.querySelector(".add-user").blur();
 }
 
 // show contact details modal
@@ -104,13 +120,31 @@ function showContactDetails(contactId) {
   document.getElementById("editPhone").value = contact.phone || "";
   document.getElementById("contactModalResult").innerHTML = "";
 
-  document.getElementById("contactModal").classList.remove("hidden");
+  const modal = document.getElementById("contactModal");
+  modal.classList.remove("hidden");
+  modal.setAttribute("aria-hidden", "false");
+
+  // Focus on first input for accessibility
+  document.getElementById("editFirstName").focus();
+
+  // Trap focus within modal
+  trapFocus(modal);
 }
 
 // close contact details modal
 function closeContactModal() {
-  document.getElementById("contactModal").classList.add("hidden");
+  const modal = document.getElementById("contactModal");
+  modal.classList.add("hidden");
+  modal.setAttribute("aria-hidden", "true");
   currentContactId = null;
+
+  // Return focus to the contact row that was clicked
+  const contactRow = document.querySelector(
+    `[data-contact-id="${currentContactId}"]`
+  );
+  if (contactRow) {
+    contactRow.focus();
+  }
 }
 
 function loadContacts() {
@@ -182,7 +216,22 @@ function displayContacts(contacts) {
   contacts.forEach((contact, index) => {
     const row = document.createElement("div");
     row.className = "row contact-row";
+    row.setAttribute("role", "button");
+    row.setAttribute("tabindex", "0");
+    row.setAttribute("data-contact-id", contact.id);
+    row.setAttribute(
+      "aria-label",
+      `Contact: ${contact.firstName} ${contact.lastName}, Email: ${contact.email}, Phone: ${contact.phone}`
+    );
+
     row.onclick = () => showContactDetails(contact.id);
+    row.onkeydown = (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        showContactDetails(contact.id);
+      }
+    };
+
     row.innerHTML = `
           <div class="column">${contact.firstName || ""}</div>
           <div class="column">${contact.lastName || ""}</div>
@@ -271,20 +320,23 @@ function addContact() {
   const phone = document.getElementById("newPhone").value.trim();
 
   if (!firstName || !lastName) {
-    document.getElementById("addContactResult").innerHTML =
-      "first and last name are required";
+    const resultDiv = document.getElementById("addContactResult");
+    resultDiv.innerHTML = "first and last name are required";
+    resultDiv.className = "form-result";
     return;
   }
 
   if (!email && !phone) {
-    document.getElementById("addContactResult").innerHTML =
-      "email and phone number is required";
+    const resultDiv = document.getElementById("addContactResult");
+    resultDiv.innerHTML = "email and phone number is required";
+    resultDiv.className = "form-result";
     return;
   }
 
   if (email && !email.includes("@")) {
-    document.getElementById("addContactResult").innerHTML =
-      "please enter a valid email address";
+    const resultDiv = document.getElementById("addContactResult");
+    resultDiv.innerHTML = "please enter a valid email address";
+    resultDiv.className = "form-result";
     return;
   }
 
@@ -308,21 +360,41 @@ function addContact() {
         if (this.status == 200) {
           let jsonObject = JSON.parse(xhr.responseText);
           if (jsonObject.error && jsonObject.error !== "") {
-            document.getElementById("addContactResult").innerHTML =
-              jsonObject.error;
+            const resultDiv = document.getElementById("addContactResult");
+            resultDiv.innerHTML = jsonObject.error;
+            resultDiv.className = "form-result";
             return;
           }
-          closeAddContactModal();
-          loadContacts();
+
+          const resultDiv = document.getElementById("addContactResult");
+          resultDiv.innerHTML = "contact added successfully!";
+          resultDiv.className = "form-result success";
+          // Force green color with inline styles
+          resultDiv.style.color = "#2e7d32";
+          resultDiv.style.backgroundColor = "#e8f5e8";
+          resultDiv.style.borderLeft = "4px solid #2e7d32";
+          console.log("Success message class set to:", resultDiv.className);
+          console.log(
+            "Element styles:",
+            window.getComputedStyle(resultDiv).color
+          );
+
+          setTimeout(() => {
+            closeAddContactModal();
+            loadContacts();
+          }, 1500);
         } else {
-          document.getElementById("addContactResult").innerHTML =
-            "Failed to add contact";
+          const resultDiv = document.getElementById("addContactResult");
+          resultDiv.innerHTML = "Failed to add contact";
+          resultDiv.className = "form-result";
         }
       }
     };
     xhr.send(jsonPayload);
   } catch (err) {
-    document.getElementById("addContactResult").innerHTML = err.message;
+    const resultDiv = document.getElementById("addContactResult");
+    resultDiv.innerHTML = err.message;
+    resultDiv.className = "form-result";
   }
 }
 
@@ -439,4 +511,45 @@ function doLogout() {
   lastName = "";
   document.cookie = "firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
   window.location.href = "index.html";
+}
+
+// Accessibility functions
+
+// Trap focus within modal for keyboard navigation
+function trapFocus(modal) {
+  const focusableElements = modal.querySelectorAll(
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+  );
+  const firstFocusableElement = focusableElements[0];
+  const lastFocusableElement = focusableElements[focusableElements.length - 1];
+
+  modal.addEventListener("keydown", function (e) {
+    if (e.key === "Tab") {
+      if (e.shiftKey) {
+        if (document.activeElement === firstFocusableElement) {
+          lastFocusableElement.focus();
+          e.preventDefault();
+        }
+      } else {
+        if (document.activeElement === lastFocusableElement) {
+          firstFocusableElement.focus();
+          e.preventDefault();
+        }
+      }
+    }
+  });
+}
+
+// Handle keyboard navigation for modals
+function handleModalKeyboard(e) {
+  if (e.key === "Escape") {
+    const addModal = document.getElementById("addContactModal");
+    const contactModal = document.getElementById("contactModal");
+
+    if (!addModal.classList.contains("hidden")) {
+      closeAddContactModal();
+    } else if (!contactModal.classList.contains("hidden")) {
+      closeContactModal();
+    }
+  }
 }

@@ -1,108 +1,277 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="user.css" />
+    <title>Fin Friends - Contact Management</title>
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="user.css">
-  <title>Fin Friends</title>
-</head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<body>
+    <!-- sidenav -->
+    <nav class="sidenav" role="navigation" aria-label="Main navigation">
+      <img
+        id="sharklogo"
+        src="./images/shark.png"
+        alt="Fin Friends shark logo"
+      />
+      <a
+        href="#school"
+        role="button"
+        tabindex="0"
+        onkeydown="handleKeyPress(event, () => {})"
+        >my school</a
+      >
+      <a
+        href="#logout"
+        role="button"
+        tabindex="0"
+        onkeydown="handleKeyPress(event, doLogout)"
+        >logout</a
+      >
+    </nav>
 
-  <!-- sidenav -->
-  <div class="sidenav">
-    <img id="sharklogo" src="./images/shark.png" alt="Shark Logo">
-    <a href="#school">my school</a>
-    <a href="#logout">logout</a>
-  </div>
+    <main class="main-container" id="main-content" role="main">
+      <header class="header">
+        <h1>Fin Friends</h1>
+      </header>
 
-  <div class="main-container">
-    <div class="header">
-      <h1>Fin Friends</h1>
+      <!-- search + icons -->
+      <section class="search-section" aria-label="Search and actions">
+        <div class="search-box">
+          <label for="searchInput" class="visually-hidden"
+            >Search contacts</label
+          >
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="search"
+            aria-label="Search contacts"
+          />
+          <span class="search-icon" aria-hidden="true">🔍</span>
+        </div>
+        <div class="icons" role="group" aria-label="Contact actions">
+          <span
+            class="refresh"
+            role="button"
+            tabindex="0"
+            aria-label="Refresh contacts"
+            title="Refresh contacts"
+            onkeydown="handleKeyPress(event, refreshContacts)"
+          >
+            🔄
+          </span>
+          <span
+            class="add-user"
+            role="button"
+            tabindex="0"
+            aria-label="Add new contact"
+            title="Add new contact"
+            onkeydown="handleKeyPress(event, showAddContactForm)"
+          >
+            👤+
+          </span>
+        </div>
+      </section>
+
+      <!-- contacts table -->
+      <section class="contacts-table" role="region" aria-label="Contacts list">
+        <div class="table-header" role="row">
+          <div class="column" role="columnheader">first name</div>
+          <div class="column" role="columnheader">last name</div>
+          <div class="column" role="columnheader">email</div>
+          <div class="column" role="columnheader">phone</div>
+        </div>
+
+        <div
+          class="table-body"
+          role="rowgroup"
+          aria-live="polite"
+          aria-label="Contact list"
+        ></div>
+      </section>
+    </main>
+
+    <!-- add contact modal -->
+    <div
+      id="addContactModal"
+      class="modal-overlay hidden"
+      role="dialog"
+      aria-labelledby="addContactTitle"
+      aria-modal="true"
+    >
+      <div class="modal-content">
+        <h2 id="addContactTitle" class="modal-title">add new contact</h2>
+        <form role="form" aria-label="Add new contact form">
+          <div class="form-group">
+            <label for="newFirstName" class="visually-hidden">First Name</label>
+            <input
+              type="text"
+              id="newFirstName"
+              name="firstName"
+              placeholder="first name"
+              class="form-input"
+              required
+              aria-describedby="addContactResult"
+            />
+          </div>
+          <div class="form-group">
+            <label for="newLastName" class="visually-hidden">Last Name</label>
+            <input
+              type="text"
+              id="newLastName"
+              name="lastName"
+              placeholder="last name"
+              class="form-input"
+              required
+              aria-describedby="addContactResult"
+            />
+          </div>
+          <div class="form-group">
+            <label for="newEmail" class="visually-hidden">Email</label>
+            <input
+              type="email"
+              id="newEmail"
+              name="email"
+              placeholder="email"
+              class="form-input"
+              aria-describedby="addContactResult"
+            />
+          </div>
+          <div class="form-group">
+            <label for="newPhone" class="visually-hidden">Phone</label>
+            <input
+              type="tel"
+              id="newPhone"
+              name="phone"
+              placeholder="phone"
+              class="form-input"
+              aria-describedby="addContactResult"
+            />
+          </div>
+          <div
+            id="addContactResult"
+            class="form-result"
+            role="status"
+            aria-live="polite"
+          ></div>
+          <div class="button-group">
+            <button
+              type="button"
+              onclick="addContact()"
+              class="modal-btn modal-btn-primary"
+            >
+              add contact
+            </button>
+            <button
+              type="button"
+              onclick="closeAddContactModal()"
+              class="modal-btn modal-btn-secondary"
+            >
+              cancel
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
 
-    <!-- search + icons -->
-    <div class="search-section">
-      <div class="search-box">
-        <input type="text" placeholder="search">
-        <span class="search-icon">🔍</span>
-      </div>
-      <div class="icons">
-        <span class="refresh">🔄</span>
-        <span class="add-user">👤+</span>
+    <!-- contact details modal -->
+    <div
+      id="contactModal"
+      class="modal-overlay hidden"
+      role="dialog"
+      aria-labelledby="contactModalTitle"
+      aria-modal="true"
+    >
+      <div class="modal-content">
+        <h2 id="contactModalTitle" class="modal-title">contact details</h2>
+        <form role="form" aria-label="Edit contact form">
+          <div class="form-group">
+            <label for="editFirstName" class="form-label">first name:</label>
+            <input
+              type="text"
+              id="editFirstName"
+              name="firstName"
+              class="form-input"
+              required
+              aria-describedby="contactModalResult"
+            />
+          </div>
+          <div class="form-group">
+            <label for="editLastName" class="form-label">last name:</label>
+            <input
+              type="text"
+              id="editLastName"
+              name="lastName"
+              class="form-input"
+              required
+              aria-describedby="contactModalResult"
+            />
+          </div>
+          <div class="form-group">
+            <label for="editEmail" class="form-label">email:</label>
+            <input
+              type="email"
+              id="editEmail"
+              name="email"
+              class="form-input"
+              aria-describedby="contactModalResult"
+            />
+          </div>
+          <div class="form-group">
+            <label for="editPhone" class="form-label">phone:</label>
+            <input
+              type="tel"
+              id="editPhone"
+              name="phone"
+              class="form-input"
+              aria-describedby="contactModalResult"
+            />
+          </div>
+          <div
+            id="contactModalResult"
+            class="form-result"
+            role="status"
+            aria-live="polite"
+          ></div>
+          <div class="button-group">
+            <button
+              type="button"
+              id="updateContactBtn"
+              class="modal-btn modal-btn-primary"
+            >
+              update
+            </button>
+            <button
+              type="button"
+              id="deleteContactBtn"
+              class="modal-btn modal-btn-danger"
+            >
+              delete
+            </button>
+            <button
+              type="button"
+              onclick="closeContactModal()"
+              class="modal-btn modal-btn-secondary"
+            >
+              close
+            </button>
+          </div>
+        </form>
       </div>
     </div>
 
-    <!-- contacts table -->
-    <div class="contacts-table">
-      <div class="table-header">
-        <div class="column">first name</div>
-        <div class="column">last name</div>
-        <div class="column">email</div>
-        <div class="column">phone</div>
-      </div>
-
-      <div class="table-body">
-
-      </div>
-    </div>
-  </div>
-
-  <!-- add contact modal -->
-  <div id="addContactModal" class="modal-overlay hidden">
-    <div class="modal-content">
-      <h2 class="modal-title">add new contact</h2>
-      <div class="form-group">
-        <input type="text" id="newFirstName" placeholder="first name" class="form-input">
-      </div>
-      <div class="form-group">
-        <input type="text" id="newLastName" placeholder="last name" class="form-input">
-      </div>
-      <div class="form-group">
-        <input type="email" id="newEmail" placeholder="email" class="form-input">
-      </div>
-      <div class="form-group">
-        <input type="tel" id="newPhone" placeholder="phone" class="form-input">
-      </div>
-      <div id="addContactResult" class="form-result"></div>
-      <div class="button-group">
-        <button onclick="addContact()" class="modal-btn modal-btn-primary">add contact</button>
-        <button onclick="closeAddContactModal()" class="modal-btn modal-btn-secondary">cancel</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- contact details modal -->
-  <div id="contactModal" class="modal-overlay hidden">
-    <div class="modal-content">
-      <h2 class="modal-title">contact details</h2>
-      <div class="form-group">
-        <label class="form-label">first name:</label>
-        <input type="text" id="editFirstName" class="form-input">
-      </div>
-      <div class="form-group">
-        <label class="form-label">last name:</label>
-        <input type="text" id="editLastName" class="form-input">
-      </div>
-      <div class="form-group">
-        <label class="form-label">email:</label>
-        <input type="email" id="editEmail" class="form-input">
-      </div>
-      <div class="form-group">
-        <label class="form-label">phone:</label>
-        <input type="tel" id="editPhone" class="form-input">
-      </div>
-      <div id="contactModalResult" class="form-result"></div>
-      <div class="button-group">
-        <button id="updateContactBtn" class="modal-btn modal-btn-primary">update</button>
-        <button id="deleteContactBtn" class="modal-btn modal-btn-danger">delete</button>
-        <button onclick="closeContactModal()" class="modal-btn modal-btn-secondary">close</button>
-      </div>
-    </div>
-  </div>
-
-  <script src="js/user.js"></script>
-
-</body>
-
+    <script src="js/user.js"></script>
+    <script>
+      // Handle keyboard navigation for custom buttons
+      function handleKeyPress(event, callback) {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          callback();
+        }
+      }
+    </script>
+  </body>
 </html>

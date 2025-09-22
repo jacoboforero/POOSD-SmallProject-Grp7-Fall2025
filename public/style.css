@@ -1,115 +1,184 @@
 @font-face {
-    font-family: "Title";
-    /* src: url("./fonts/Dobidoo/Dobidoo.otf"); */
-    src: url("./fonts/catfiles/Catfiles.otf");
+  font-family: "Title";
+  /* src: url("./fonts/Dobidoo/Dobidoo.otf"); */
+  src: url("./fonts/catfiles/Catfiles.otf");
+}
+
+/* Accessibility improvements */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: #4c5c5c;
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 1000;
+  font-weight: bold;
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
 
 .header {
-     display: flex; 
-     align-items: center; 
-     position: relative; 
-     width: 100%;
-     padding: 20px 0;
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  padding: 20px 0;
 }
 
 #sharklogo {
-    width: 250px; 
-    height: 110px;
-    object-fit: cover;
-    object-position: center;
+  width: 250px;
+  height: 110px;
+  object-fit: cover;
+  object-position: center;
 }
 
 .header h1 {
-    position: absolute; 
-    left: 50%; 
-    transform: translateX(-50%); 
-    margin: 0; 
-    width: 100%; 
-    text-align: center;
-    color: #4C5C5C;
-    font-size: 70px;
-    font-family: "Title";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  color: #4c5c5c;
+  font-size: 70px;
+  font-family: "Title";
 }
 
 html {
-    background-color: #cce3e2;
+  background-color: #cce3e2;
 }
 
 .main-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: calc(100vh - 150px);
-    padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 150px);
+  padding: 20px;
 }
 
 .login-container {
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(76, 92, 92, 0.2);
-    max-width: 400px;
-    width: 100%;
-    text-align: center;
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(76, 92, 92, 0.2);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
 }
 
 .login-container h2 {
-    color: #4C5C5C;
-    margin-bottom: 30px;
-    font-family: Arial, sans-serif;
+  color: #4c5c5c;
+  margin-bottom: 30px;
+  font-family: Arial, sans-serif;
 }
 
 .form-group {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .form-group input {
-    width: 100%;
-    padding: 15px;
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    font-size: 16px;
-    box-sizing: border-box;
+  width: 100%;
+  padding: 15px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.form-group input:focus {
+  outline: 3px solid #4c5c5c;
+  outline-offset: 2px;
+  border-color: #4c5c5c;
 }
 
 .login-container button {
-    width: 100%;
-    padding: 15px;
-    background: #4C5C5C;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-size: 16px;
-    cursor: pointer;
+  width: 100%;
+  padding: 15px;
+  background: #4c5c5c;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.login-container button:focus {
+  outline: 3px solid #6b8e8e;
+  outline-offset: 2px;
+}
+
+.login-container button:hover {
+  background: #3a4444;
 }
 
 #loginResult {
-    margin-top: 15px;
-    color: red;
-    font-weight: bold;
+  margin-top: 15px;
+  color: red;
+  font-weight: bold;
 }
 
 .register-link {
-    margin-top: 20px;
-    text-align: center;
+  margin-top: 20px;
+  text-align: center;
 }
 
 .register-link p {
-    color: #4C5C5C;
-    font-size: 18px;
+  color: #4c5c5c;
+  font-size: 18px;
 }
 
 .register-link a {
-    color: #6B8E8E;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
+  color: #6b8e8e;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
 }
 
 .register-link a:hover {
-    color: #4C5C5C;
-    text-decoration: underline;
+  color: #4c5c5c;
+  text-decoration: underline;
 }
 
+.register-link a:focus {
+  outline: 3px solid #6b8e8e;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
 
+/* Improve color contrast for better accessibility */
+#loginResult {
+  margin-top: 15px;
+  color: #d32f2f;
+  font-weight: bold;
+  padding: 8px;
+  border-radius: 4px;
+}
 
+/* Ensure sufficient contrast for all text */
+body {
+  color: #2c2c2c;
+}
+
+/* Improve button contrast */
+.login-container button:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+  opacity: 0.6;
+}

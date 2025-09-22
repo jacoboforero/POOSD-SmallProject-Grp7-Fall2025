@@ -1,86 +1,191 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Fin Friends - Contact Management System</title>
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="style.css">
-  <title>Fin Friends</title>
-</head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header class="header" role="banner">
+      <img
+        id="sharklogo"
+        src="./images/shark.png"
+        alt="Fin Friends shark logo"
+      />
+      <h1>Fin Friends</h1>
+    </header>
 
-<body>
-  <div class="header">
-    <img id="sharklogo" src="./images/shark.png">
-    <h1>Fin Friends</h1>
-  </div>
+    <main class="main-content" id="main-content" role="main">
+      <section
+        class="login-container"
+        id="loginForm"
+        aria-labelledby="login-heading"
+      >
+        <h2 id="login-heading">welcome back!</h2>
+        <form
+          onsubmit="doLogin(); return false;"
+          role="form"
+          aria-label="Login form"
+        >
+          <div class="form-group">
+            <label for="loginName" class="visually-hidden">Username</label>
+            <input
+              type="text"
+              id="loginName"
+              name="username"
+              placeholder="username"
+              required
+              aria-describedby="loginResult"
+            />
+          </div>
+          <div class="form-group">
+            <label for="loginPassword" class="visually-hidden">Password</label>
+            <input
+              type="password"
+              id="loginPassword"
+              name="password"
+              placeholder="password"
+              required
+              aria-describedby="loginResult"
+            />
+          </div>
+          <button type="submit" aria-describedby="loginResult">dive in</button>
+          <div class="register-link">
+            <p>
+              new to the reef?
+              <a
+                href="#"
+                onclick="showRegister()"
+                role="button"
+                tabindex="0"
+                onkeydown="handleKeyPress(event, showRegister)"
+                >join the school</a
+              >
+            </p>
+          </div>
+        </form>
+        <div id="loginResult" role="status" aria-live="polite"></div>
+      </section>
 
-  <div class="main-content">
-    <div class="login-container" id="loginForm">
-      <h2>welcome back!</h2>
-      <form onsubmit="doLogin(); return false;">
-        <div class="form-group">
-          <input type="text" id="loginName" placeholder="username" required>
-        </div>
-        <div class="form-group">
-          <input type="password" id="loginPassword" placeholder="password" required>
-        </div>
-        <button type="submit">dive in</button>
-        <div class="register-link">
-          <p>new to the reef? <a href="#" onclick="showRegister()">join the school</a></p>
-        </div>
-      </form>
-      <div id="loginResult"></div>
-    </div>
+      <section
+        class="login-container"
+        id="registerForm"
+        style="display: none"
+        aria-labelledby="register-heading"
+      >
+        <h2 id="register-heading">join the school!</h2>
+        <form
+          onsubmit="doRegister(); return false;"
+          role="form"
+          aria-label="Registration form"
+        >
+          <div class="form-group">
+            <label for="registerFirstName" class="visually-hidden"
+              >First Name</label
+            >
+            <input
+              type="text"
+              id="registerFirstName"
+              name="firstName"
+              placeholder="first name"
+              required
+              aria-describedby="registerResult"
+            />
+          </div>
+          <div class="form-group">
+            <label for="registerLastName" class="visually-hidden"
+              >Last Name</label
+            >
+            <input
+              type="text"
+              id="registerLastName"
+              name="lastName"
+              placeholder="last name"
+              required
+              aria-describedby="registerResult"
+            />
+          </div>
+          <div class="form-group">
+            <label for="registerUsername" class="visually-hidden"
+              >Username</label
+            >
+            <input
+              type="text"
+              id="registerUsername"
+              name="username"
+              placeholder="username"
+              required
+              aria-describedby="registerResult"
+            />
+          </div>
+          <div class="form-group">
+            <label for="registerPassword" class="visually-hidden"
+              >Password</label
+            >
+            <input
+              type="password"
+              id="registerPassword"
+              name="password"
+              placeholder="password"
+              required
+              aria-describedby="registerResult"
+            />
+          </div>
+          <button type="submit" aria-describedby="registerResult">
+            swim in
+          </button>
+          <div class="register-link">
+            <p>
+              already in the reef?
+              <a
+                href="#"
+                onclick="showLogin()"
+                role="button"
+                tabindex="0"
+                onkeydown="handleKeyPress(event, showLogin)"
+                >swim back</a
+              >
+            </p>
+          </div>
+        </form>
+        <div id="registerResult" role="status" aria-live="polite"></div>
+      </section>
+    </main>
 
-    <div class="login-container" id="registerForm" style="display: none;">
-      <h2>join the school!</h2>
-      <form onsubmit="doRegister(); return false;">
-        <div class="form-group">
-          <input type="text" id="registerFirstName" placeholder="first name" required>
-        </div>
-        <div class="form-group">
-          <input type="text" id="registerLastName" placeholder="last name" required>
-        </div>
-        <div class="form-group">
-          <input type="text" id="registerUsername" placeholder="username" required>
-        </div>
-        <div class="form-group">
-          <input type="password" id="registerPassword" placeholder="password" required>
-        </div>
-        <button type="submit">swim in</button>
-        <div class="register-link">
-          <p>already in the reef? <a href="#" onclick="showLogin()">swim back</a></p>
-        </div>
+    <script src="js/code.js"></script>
+    <script>
+      function showRegister() {
+        // Hide the login form
+        document.getElementById("loginForm").style.display = "none";
 
-      </form>
-      <div id="registerResult"></div>
-    </div>
-  </div>
+        // Show the register form
+        document.getElementById("registerForm").style.display = "block";
 
-  <script src="js/code.js"></script>
-  <script>
-    function showRegister() {
-      // Hide the login form
-      document.getElementById("loginForm").style.display = "none";
+        // Focus on first input for accessibility
+        document.getElementById("registerFirstName").focus();
+      }
 
-      // Show the register form
-      document.getElementById("registerForm").style.display = "block";
-    }
+      function showLogin() {
+        // Hide the register form
+        document.getElementById("registerForm").style.display = "none";
 
-    function showLogin() {
-      // Hide the register form
-      document.getElementById("registerForm").style.display = "none";
+        // Show the login form
+        document.getElementById("loginForm").style.display = "block";
 
-      // Show the login form
-      document.getElementById("loginForm").style.display = "block";
-    }
-  </script>
+        // Focus on first input for accessibility
+        document.getElementById("loginName").focus();
+      }
 
-
-  </form>
-  <div id="loginResult"></div>
-  </div>
-  </div>
-
-</body>
-
+      // Handle keyboard navigation for custom buttons
+      function handleKeyPress(event, callback) {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          callback();
+        }
+      }
+    </script>
+  </body>
 </html>
