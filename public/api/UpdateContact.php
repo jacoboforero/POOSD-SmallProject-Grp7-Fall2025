@@ -8,8 +8,8 @@
 	$email = $inData["email"];
 	$userId = $inData["userId"];
 
-	if (empty($id) || empty($firstName) || empty($lastName) || empty($phone) || empty($email) || empty($userId)) {
-        returnWithError("Missing required fields.");
+	if (empty($id) || empty($firstName) || empty($lastName) || empty($phone) || empty($email)) {
+        returnWithError("missing required fields.");
         exit();
     }
 
@@ -29,7 +29,7 @@
     	}
 		else
 		{
-        	returnWithError("Update failed: " . $stmt->error);
+        	returnWithError("update failed: " . $stmt->error);
     	}
 
 		$stmt->close();

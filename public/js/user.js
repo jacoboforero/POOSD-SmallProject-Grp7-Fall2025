@@ -124,7 +124,7 @@
       if (contacts.length === 0) {
         const emptyRow = document.createElement('div');
         emptyRow.className = 'row';
-        emptyRow.innerHTML = '<div class="empty-contacts">No contacts found</div>';
+        emptyRow.innerHTML = '<div class="empty-contacts">no contacts found</div>';
         tableBody.appendChild(emptyRow);
         return;
       }

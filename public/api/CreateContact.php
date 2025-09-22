@@ -7,8 +7,8 @@
 	$email = $inData["email"];
 	$userId = $inData["userId"];
 
-	if (empty($firstName) || empty($lastName) || empty($phone) || empty($email) || empty($userId)) {
-        returnWithError("Missing required fields.");
+	if (empty($firstName) || empty($lastName) || empty($phone) || empty($email)) {
+        returnWithError("missing required fields.");
         exit();
     }
 
@@ -29,7 +29,7 @@
     	} 
 		else 
 		{
-        	returnWithError("Error inserting contact: " . $stmt->error);
+        	returnWithError("error inserting contact: " . $stmt->error);
     	}
 
 		$stmt->close();
