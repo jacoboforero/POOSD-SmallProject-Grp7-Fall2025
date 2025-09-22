@@ -17,7 +17,7 @@
 
 		if (count($searchParts) > 1)
 		{
-			$firstNamePart = $searchParts[0] . '%';
+			$firstNamePart = '%' . $searchParts[0] . '%';
 			$lastNamePart = implode(" ", array_slice($searchParts, 1)) . '%';
 
 			$stmt = $conn->prepare("SELECT ID, FirstName, LastName, Phone, Email FROM Contacts WHERE FirstName LIKE ? AND LastName LIKE ? AND UserID=?");
