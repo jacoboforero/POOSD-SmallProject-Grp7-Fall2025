@@ -8,7 +8,7 @@
 	$email = $inData["email"];
 	$userId = $inData["userId"];
 
-	if (empty($id) || empty($firstName) || empty($lastName) || empty($phone) || empty($email)) {
+	if (empty($firstName) || empty($lastName) || empty($phone) || empty($email)) {
         returnWithError("missing required fields.");
         exit();
     }
