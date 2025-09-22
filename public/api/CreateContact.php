@@ -14,6 +14,11 @@
         exit();
     }
 
+	if ($userId <= 0) {
+        returnWithError("invalid user ID.");
+        exit();
+    }
+
 	$conn = getDBConnection();
 	if (!$conn) 
 	{

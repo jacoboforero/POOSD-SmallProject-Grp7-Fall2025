@@ -44,7 +44,7 @@ function doLogin() {
 
         firstName = jsonObject.firstName;
         lastName = jsonObject.lastName;
-        userId = jsonObject.userId;
+        // userId is already set from jsonObject.id above
 
         saveCookie();
 
