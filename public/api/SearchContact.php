@@ -13,7 +13,8 @@
 	} 
 	else
 	{
-		$searchParts = explode(" ", trim($inData["search"]));
+		$searchInput = trim($inData["search"]);
+		$searchParts = explode(" ", $searchInput);
 
 		if (count($searchParts) > 1)
 		{
