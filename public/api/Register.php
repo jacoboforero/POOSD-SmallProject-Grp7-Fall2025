@@ -21,6 +21,20 @@
 	}
 	else
 	{
+		$checkStmt = $conn->prepare("SELECT ID FROM Users WHERE Login = ?");
+		$checkStmt->bind_param("s", $login);
+		$checkStmt->execute();
+		$checkStmt->store_result();
+
+		if ($checkStmt->num_rows > 0) {
+			$checkStmt->close();
+			$conn->close();
+			returnWithError("Login already in use");
+			exit();
+		}
+
+		$checkStmt->close();
+
         $stmt = $conn->prepare("INSERT INTO Users (FirstName, LastName, Login, Password) VALUES (?, ?, ?, ?)");
 		$stmt->bind_param("ssss", $firstName, $lastName, $login, $password);
 		
