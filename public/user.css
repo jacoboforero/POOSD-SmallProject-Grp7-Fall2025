@@ -86,7 +86,7 @@ html {
 }
 
 .main-container {
-  margin-left: 160px;
+  margin-left: 250px;
   padding: 20px;
 }
 
@@ -425,4 +425,110 @@ body {
 .contacts-table .table-body .row .column:nth-child(4) {
   text-align: left !important;
   padding-left: 15px !important;
+}
+
+/* Mobile responsive design */
+@media (max-width: 768px) {
+  .sidenav {
+    width: 100%;
+    height: auto;
+    position: relative;
+    padding: 10px 0;
+    border-right: none;
+    border-bottom: 2px solid #cce3e2;
+  }
+
+  #sharklogo {
+    width: 150px;
+    height: 66px;
+  }
+
+  .sidenav a {
+    display: inline-block;
+    margin: 10px 15px;
+    padding: 10px 15px;
+    font-size: 18px;
+  }
+
+  .main-container {
+    margin-left: 0;
+    padding: 10px;
+  }
+
+  .header h1 {
+    font-size: 40px;
+    margin: 10px 0 20px;
+  }
+
+  .search-section {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .search-box {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .icons {
+    padding-left: 0;
+    justify-content: center;
+  }
+
+  .contacts-table {
+    margin: 0;
+    max-width: 100%;
+  }
+
+  .table-header,
+  .row {
+    grid-template-columns: 1fr 1fr 1.5fr 1fr;
+    font-size: 14px;
+  }
+
+  .table-header {
+    font-size: 16px;
+  }
+
+  .modal-content {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .modal-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 30px;
+  }
+
+  .table-header,
+  .row {
+    grid-template-columns: 1fr 1fr;
+    font-size: 12px;
+  }
+
+  .table-header .column:nth-child(3),
+  .table-header .column:nth-child(4),
+  .row .column:nth-child(3),
+  .row .column:nth-child(4) {
+    display: none;
+  }
+
+  .search-box input {
+    font-size: 16px;
+    padding: 8px 30px;
+  }
+
+  .icons {
+    font-size: 20px;
+  }
 }
