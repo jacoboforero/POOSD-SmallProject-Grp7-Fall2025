@@ -183,14 +183,14 @@ html {
   background-color: #e9f3f3;
   font-weight: bold;
   font-size: 20px;
-  text-align: center;
+  text-align: left;
   padding: 10px 0;
   border-bottom: 2px solid #4c5c5c;
   color: #4c5c5c;
 }
 
 .row {
-  text-align: center;
+  text-align: left;
   padding: 10px 0;
   font-size: 18px;
 }
@@ -408,4 +408,23 @@ body {
   color: #666;
   font-style: italic;
   grid-column: 1 / -1;
+}
+
+/* Force alignment for all columns - using more specific selectors */
+.contacts-table .table-header .column:first-child,
+.contacts-table .table-header .column:nth-child(2),
+.contacts-table .table-body .row .column:first-child,
+.contacts-table .table-body .row .column:nth-child(2) {
+  text-align: left !important;
+  padding-left: 20px !important;
+  background-color: yellow !important;
+  border: 2px solid red !important;
+}
+
+.contacts-table .table-header .column:nth-child(3),
+.contacts-table .table-header .column:nth-child(4),
+.contacts-table .table-body .row .column:nth-child(3),
+.contacts-table .table-body .row .column:nth-child(4) {
+  text-align: center !important;
+  background-color: lightblue !important;
 }

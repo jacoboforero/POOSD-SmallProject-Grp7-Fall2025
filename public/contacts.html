@@ -4,6 +4,40 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="user.css" />
+    <style>
+      /* Force left alignment for first and last name columns */
+      .contacts-table .table-header .column:first-child,
+      .contacts-table .table-header .column:nth-child(2),
+      .contacts-table .table-body .row .column:first-child,
+      .contacts-table .table-body .row .column:nth-child(2) {
+        text-align: left !important;
+        padding-left: 15px !important;
+      }
+
+      /* Alternative approach - target by grid position */
+      .contacts-table .row .column:nth-of-type(1),
+      .contacts-table .row .column:nth-of-type(2) {
+        text-align: left !important;
+        padding-left: 15px !important;
+      }
+
+      /* Left align email and phone columns with proper text wrapping */
+      .contacts-table .table-header .column:nth-child(3),
+      .contacts-table .table-header .column:nth-child(4),
+      .contacts-table .table-body .row .column:nth-child(3),
+      .contacts-table .table-body .row .column:nth-child(4) {
+        text-align: left !important;
+        padding-left: 15px !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+      }
+
+      /* Ensure the table has proper column widths */
+      .contacts-table .table-header,
+      .contacts-table .row {
+        grid-template-columns: 1fr 1fr 2fr 1.5fr !important;
+      }
+    </style>
     <title>Fin Friends - Contact Management</title>
   </head>
 
