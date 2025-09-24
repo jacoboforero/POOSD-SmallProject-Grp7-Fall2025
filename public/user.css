@@ -523,8 +523,9 @@ body {
 @media (max-width: 600px) {
   .sidenav {
     padding: 12px 15px;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    justify-content: space-between;
     gap: 8px;
   }
 
@@ -548,15 +549,8 @@ body {
 
   .table-header,
   .row {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1.5fr 1fr;
     font-size: 12px;
-  }
-
-  .table-header .column:nth-child(3),
-  .table-header .column:nth-child(4),
-  .row .column:nth-child(3),
-  .row .column:nth-child(4) {
-    display: none;
   }
 
   .search-box input {
