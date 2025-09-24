@@ -123,6 +123,7 @@ html {
   border-radius: 8px;
   font-size: 18px;
   background-color: #e9f3f3;
+  text-align: left;
 }
 
 .search-box input:focus {
@@ -480,6 +481,7 @@ body {
     gap: 10px;
     margin-bottom: 15px;
     align-items: center;
+    justify-content: center;
   }
 
   .search-box {
@@ -558,6 +560,7 @@ body {
   .search-box input {
     font-size: 16px;
     padding: 8px 30px;
+    text-align: left;
   }
 
   .icons {
