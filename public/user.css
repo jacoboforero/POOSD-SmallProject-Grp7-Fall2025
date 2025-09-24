@@ -479,11 +479,13 @@ body {
     flex-direction: column;
     gap: 10px;
     margin-bottom: 15px;
+    align-items: center;
   }
 
   .search-box {
     width: 100%;
     max-width: 300px;
+    margin: 0 auto;
   }
 
   .icons {
