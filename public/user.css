@@ -410,21 +410,19 @@ body {
   grid-column: 1 / -1;
 }
 
-/* Force alignment for all columns - using more specific selectors */
+/* Clean alignment styles - no debug colors */
 .contacts-table .table-header .column:first-child,
 .contacts-table .table-header .column:nth-child(2),
 .contacts-table .table-body .row .column:first-child,
 .contacts-table .table-body .row .column:nth-child(2) {
   text-align: left !important;
-  padding-left: 20px !important;
-  background-color: yellow !important;
-  border: 2px solid red !important;
+  padding-left: 15px !important;
 }
 
 .contacts-table .table-header .column:nth-child(3),
 .contacts-table .table-header .column:nth-child(4),
 .contacts-table .table-body .row .column:nth-child(3),
 .contacts-table .table-body .row .column:nth-child(4) {
-  text-align: center !important;
-  background-color: lightblue !important;
+  text-align: left !important;
+  padding-left: 15px !important;
 }
